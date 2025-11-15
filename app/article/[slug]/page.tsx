@@ -8,10 +8,14 @@ export const dynamic = "force-dynamic";
 export default async function ArticlePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const article = await fetchArticleBySlug(params.slug);
-  if (!article) return notFound();
+  const { slug } = await params;
+  const article = await fetchArticleBySlug(slug);
+  if (!article) {
+    console.warn("Article not found for slug", slug, "— check env vars NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY and slug correctness");
+    return notFound();
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950">
@@ -30,9 +34,24 @@ export default async function ArticlePage({
         </div>
       </header>
 
-      {/* Article */}
-      <main className="mx-auto max-w-4xl px-6 py-12">
-        <article className="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800">
+      {/* Article with Side Ads */}
+      <main className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid grid-cols-12 gap-6">
+          {/* Left Sidebar Ads (desktop only) */}
+          <aside className="hidden xl:block col-span-2">
+            <div className="sticky top-24 space-y-6">
+              <div className="rounded-lg bg-slate-100 dark:bg-slate-800 p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 text-center">
+                <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
+                <div id="ad-left-sidebar" className="mx-auto w-full max-w-[160px] h-[600px] bg-slate-200 dark:bg-slate-700 flex items-center justify-center rounded">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-300">160x600 Skyscraper</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          {/* Article Content */}
+          <div className="col-span-12 xl:col-span-8">
+            <article className="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800">
           {/* Hero */}
           {article.image_url ? (
             <div className="aspect-[21/9] w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
@@ -59,12 +78,12 @@ export default async function ArticlePage({
                   {article.category}
                 </span>
               )}
-              {article.source && (
+              {article.source_name && (
                 <span className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
                   <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
                   </svg>
-                  {article.source}
+                  {article.source_name}
                 </span>
               )}
             </div>
@@ -110,19 +129,33 @@ export default async function ArticlePage({
               </div>
             )}
           </div>
-        </article>
+            </article>
 
-        {/* Back Button */}
-        <div className="mt-8 text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to all articles
-          </Link>
+            {/* Back Button */}
+            <div className="mt-8 text-center">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to all articles
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Sidebar Ads (desktop only) */}
+          <aside className="hidden xl:block col-span-2">
+            <div className="sticky top-24 space-y-6">
+              <div className="rounded-lg bg-slate-100 dark:bg-slate-800 p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 text-center">
+                <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
+                <div id="ad-right-sidebar" className="mx-auto w-full max-w-[300px] h-[600px] bg-slate-200 dark:bg-slate-700 flex items-center justify-center rounded">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-300">300x600 Half Page</span>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </main>
     </div>

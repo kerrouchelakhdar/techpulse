@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: env.siteName,
   description: "Curated daily tech insights powered by Supabase + Next.js",
   metadataBase: new URL(env.siteUrl),
+  other: {
+    monetag: "cffb84d1b293d3b0b60b39a5847ab61b",
+  },
 };
 
 export default function RootLayout({
