@@ -47,18 +47,18 @@ export default function Home() {
 
   useEffect(() => {
     let filtered = articles;
-    
+
     if (selectedCategory !== "All") {
       filtered = filtered.filter(article => article.category === selectedCategory);
     }
-    
+
     if (searchQuery.trim()) {
       filtered = filtered.filter(article =>
         article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.description?.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    
+
     setFilteredArticles(filtered);
   }, [selectedCategory, searchQuery, articles]);
 
