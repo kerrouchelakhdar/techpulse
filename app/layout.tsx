@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { env } from "@/lib/env";
 
@@ -33,6 +34,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        
+        {/* Monetag Multitag - All-in-One Ad Solution */}
+        <Script
+          src="https://fpyf8.com/88/tag.min.js"
+          data-zone="185606"
+          strategy="afterInteractive"
+          data-cfasync="false"
+        />
       </body>
     </html>
   );
