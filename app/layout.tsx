@@ -35,12 +35,22 @@ export default function RootLayout({
       >
         {children}
         
-        {/* Monetag Multitag - All-in-One Ad Solution */}
+        {/* Monetag Vignette Banner - Non-intrusive bottom/top banner */}
         <Script
-          src="https://fpyf8.com/88/tag.min.js"
-          data-zone="185606"
+          id="monetag-vignette"
           strategy="afterInteractive"
-          data-cfasync="false"
+          dangerouslySetInnerHTML={{
+            __html: `(function(s){s.dataset.zone='10192644',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+          }}
+        />
+        
+        {/* Monetag In-Page Push - Banner-style notifications */}
+        <Script
+          id="monetag-inpage"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(s){s.dataset.zone='10192647',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+          }}
         />
       </body>
     </html>
