@@ -291,6 +291,7 @@ export default function Home() {
               <ul className="space-y-2">
                 <li><Link href="/privacy" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Service</Link></li>
+                <li><Link href="/disclaimer" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Disclaimer</Link></li>
               </ul>
             </div>
             <div>

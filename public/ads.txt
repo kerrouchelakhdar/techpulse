@@ -1,0 +1,6 @@
+# Google AdSense (add your publisher ID after approval)
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# Monetag
+gizokraijaw.net, 10192644, DIRECT
+nap5k.com, 10192647, DIRECT
