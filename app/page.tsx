@@ -177,7 +177,7 @@ export default function Home() {
                 {/* Ad Space - Top Banner */}
                 <div className="mb-8 rounded-lg bg-slate-100 dark:bg-slate-800 p-4 text-center border-2 border-dashed border-slate-300 dark:border-slate-700">
                   <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
-                  <div className="h-24 flex items-center justify-center">
+                  <div className="min-h-[90px] flex items-center justify-center">
                     <div id="ad-top-banner" className="w-full max-w-3xl">
                       <AdSlot keyId="97cc9759b96fe229e934cc5f4183d23c" width={728} height={90} />
                     </div>
@@ -243,9 +243,9 @@ export default function Home() {
                       {(index + 1) % 6 === 0 && index < filteredArticles.length - 1 && (
                         <div className="col-span-full rounded-lg bg-slate-50 dark:bg-slate-800/50 p-6 text-center border border-dashed border-slate-300 dark:border-slate-700">
                           <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
-                          <div className="h-32 flex items-center justify-center">
+                          <div className="min-h-[250px] flex items-center justify-center">
                             <div id={`ad-inline-${Math.floor((index + 1) / 6)}`} className="w-full max-w-3xl">
-                              <p className="text-sm text-slate-400">Ad Space: Inline Banner</p>
+                              <AdSlot keyId="3e128bbc109c992fa09a322d3d6f37fe" width={300} height={250} />
                             </div>
                           </div>
                         </div>
@@ -257,9 +257,9 @@ export default function Home() {
                 {/* Ad Space - Bottom Banner */}
                 <div className="mt-12 rounded-lg bg-slate-100 dark:bg-slate-800 p-4 text-center border-2 border-dashed border-slate-300 dark:border-slate-700">
                   <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
-                  <div className="h-24 flex items-center justify-center">
+                  <div className="min-h-[250px] flex items-center justify-center">
                     <div id="ad-bottom-banner" className="w-full max-w-3xl">
-                      <AdSlot keyId="97cc9759b96fe229e934cc5f4183d23c" width={728} height={90} />
+                      <AdSlot keyId="3e128bbc109c992fa09a322d3d6f37fe" width={300} height={250} />
                     </div>
                   </div>
                 </div>

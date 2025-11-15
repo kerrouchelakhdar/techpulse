@@ -2,6 +2,7 @@ import { fetchArticleBySlug } from "@/lib/data/articles";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import AdSlot from "@/components/AdSlot";
 
 export const dynamic = "force-dynamic";
 
@@ -42,8 +43,8 @@ export default async function ArticlePage({
             <div className="sticky top-24 space-y-6">
               <div className="rounded-lg bg-slate-100 dark:bg-slate-800 p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 text-center">
                 <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
-                <div id="ad-left-sidebar" className="mx-auto w-full max-w-[160px] h-[600px] bg-slate-200 dark:bg-slate-700 flex items-center justify-center rounded">
-                  <span className="text-[10px] text-slate-500 dark:text-slate-300">160x600 Skyscraper</span>
+                <div id="ad-left-sidebar" className="mx-auto w-full max-w-[160px]">
+                  <AdSlot keyId="79e58fc995d412a8a983d32385893738" width={160} height={600} />
                 </div>
               </div>
             </div>
@@ -150,8 +151,8 @@ export default async function ArticlePage({
             <div className="sticky top-24 space-y-6">
               <div className="rounded-lg bg-slate-100 dark:bg-slate-800 p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 text-center">
                 <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
-                <div id="ad-right-sidebar" className="mx-auto w-full max-w-[300px] h-[600px] bg-slate-200 dark:bg-slate-700 flex items-center justify-center rounded">
-                  <span className="text-[10px] text-slate-500 dark:text-slate-300">300x600 Half Page</span>
+                <div id="ad-right-sidebar" className="mx-auto w-full max-w-[300px]">
+                  <AdSlot keyId="009d099c2897d96773aa78b6aa8938c2" width={160} height={300} />
                 </div>
               </div>
             </div>
