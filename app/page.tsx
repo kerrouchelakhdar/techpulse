@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, Fragment } from "react";
+import AdSlot from "@/components/AdSlot";
 
 interface Article {
   id: string;
@@ -178,7 +179,7 @@ export default function Home() {
                   <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
                   <div className="h-24 flex items-center justify-center">
                     <div id="ad-top-banner" className="w-full max-w-3xl">
-                      <p className="text-sm text-slate-400">Ad Space: 728x90 Banner</p>
+                      <AdSlot keyId="97cc9759b96fe229e934cc5f4183d23c" width={728} height={90} />
                     </div>
                   </div>
                 </div>
@@ -258,7 +259,7 @@ export default function Home() {
                   <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Advertisement</div>
                   <div className="h-24 flex items-center justify-center">
                     <div id="ad-bottom-banner" className="w-full max-w-3xl">
-                      <p className="text-sm text-slate-400">Ad Space: 728x90 Banner</p>
+                      <AdSlot keyId="97cc9759b96fe229e934cc5f4183d23c" width={728} height={90} />
                     </div>
                   </div>
                 </div>
