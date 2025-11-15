@@ -3,6 +3,40 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import AdSlot from "@/components/AdSlot";
+import type { Metadata } from "next";
+import Image from "next/image";
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await fetchArticleBySlug(slug);
+  if (!article) return { title: "Article not found" };
+
+  const title = article.title;
+  const description = article.meta_description || article.description || undefined;
+  const url = `https://techpulsse.netlify.app/article/${article.slug}`;
+  const images = article.image_url ? [article.image_url] : undefined;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      images,
+    },
+    twitter: {
+      card: images ? "summary_large_image" : "summary",
+      title,
+      description,
+      images,
+    },
+  };
+}
 
 export const dynamic = "force-dynamic";
 
@@ -55,11 +89,14 @@ export default async function ArticlePage({
             <article className="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800">
           {/* Hero */}
           {article.image_url ? (
-            <div className="aspect-[21/9] w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-              <img
+            <div className="relative aspect-[21/9] w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <Image
                 src={article.image_url}
                 alt={article.title}
-                className="h-full w-full object-cover"
+                fill
+                priority
+                className="object-cover"
+                sizes="(min-width: 1280px) 896px, 100vw"
               />
             </div>
           ) : (
@@ -104,6 +141,27 @@ export default async function ArticlePage({
 
             {/* Article Content */}
             <div className="prose prose-lg prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-pre:bg-slate-900 dark:prose-pre:bg-slate-950 prose-pre:shadow-xl">
+                {/* JSON-LD Structured Data */}
+                <script
+                  type="application/ld+json"
+                  suppressHydrationWarning
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "Article",
+                      headline: article.title,
+                      description: article.meta_description || article.description,
+                      image: article.image_url || undefined,
+                      author: { "@type": "Organization", name: "TechPulse" },
+                      datePublished: article.published_date || article.created_at,
+                      dateModified: article.updated_at || article.published_date || article.created_at,
+                      mainEntityOfPage: {
+                        "@type": "WebPage",
+                        "@id": `https://techpulsse.netlify.app/article/${article.slug}`,
+                      },
+                    }),
+                  }}
+                />
               <ReactMarkdown>{article.content}</ReactMarkdown>
             </div>
 
